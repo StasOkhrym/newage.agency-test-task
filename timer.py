@@ -1,7 +1,8 @@
 import time
+from typing import Callable
 
 
-def timer(func):
+def timer(func: Callable) -> Callable:
     def wrapper(*args, **kwargs):
         start_time = time.perf_counter()
         value = func(*args, **kwargs)

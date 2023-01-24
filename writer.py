@@ -1,7 +1,11 @@
 import os
-from dotenv import load_dotenv
+
 import gspread
+from dotenv import load_dotenv
+from gspread import Worksheet
 from oauth2client.service_account import ServiceAccountCredentials
+from pandas import DataFrame
+from pandas.core.groupby import DataFrameGroupBy
 from tornado import concurrent
 
 from timer import timer
@@ -19,20 +23,22 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(
 client = gspread.authorize(credentials)
 
 
-def write_df_to_sheet(sheet_name, df):
+def write_df_to_sheet(sheet_name: str, df: DataFrame) -> None:
     sheet = client.create(sheet_name)
     worksheet = client.open(sheet_name).sheet1
     sheet.share(os.getenv("SHARE_EMAIL"), perm_type="user", role="writer")
     worksheet.update([df.columns.values.tolist()] + df.values.tolist())
 
 
-def write_picked_df_to_sheet(worksheet, df, name):
+def write_picked_df_to_sheet(worksheet: Worksheet, df: DataFrame, name: str) -> None:
     worksheet.update([df.columns.values.tolist()] + df.values.tolist())
     print(f"Done({name})", end=" ")
 
 
 @timer
-def write_dataframes_to_sheets(sheet_name, grouped_dataframes):
+def write_dataframes_to_sheets(
+    sheet_name: str, grouped_dataframes: DataFrameGroupBy
+) -> None:
     sheet = client.create(sheet_name)
     sheet.share(os.getenv("SHARE_EMAIL"), perm_type="user", role="writer")
     futures = []
