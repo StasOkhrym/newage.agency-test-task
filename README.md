@@ -19,4 +19,4 @@ The result of every task is saved in Google Sheets which you can check below:
 
 - [Task 1](https://docs.google.com/spreadsheets/d/1NAyxY4hdqbBBwdbk2DnL0rvg9WAZy_57A-q6s02m4ok/edit#gid=0)
 - [Task 2](https://docs.google.com/spreadsheets/d/1I81RxAj9wSjS-H3h5F_ETmvN3NWn0s1bq8yXebhh7Us/edit#gid=2014478030)
-- [Task 3](https://docs.google.com/spreadsheets/d/1atkjUdo5zbSxcH-GY9NCx1t7Q7RZCriQNSk7UqLp4So/edit#gid=0)
+- [Task 3](https://docs.google.com/spreadsheets/d/1QulEBE5UTxrjFUr4enG26QV6NyVJFiYuNGCrgcA4UYg/edit#gid=0)

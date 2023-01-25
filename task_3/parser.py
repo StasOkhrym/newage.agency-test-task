@@ -15,29 +15,30 @@ class OLXParser:
             element.text
             for element in self.driver.find_elements(By.CLASS_NAME, "css-b5m1rv")
         ]
+        floor, area = self._retrieve_data_from_elements(info_elements)
 
         name = self.driver.find_element(By.CLASS_NAME, "css-1soizd2").text
         price = self.driver.find_element(By.CLASS_NAME, "css-dcwlyx").text.split("\n")[0]
-
-        apartment_floor = [element for element in info_elements if element.startswith("Поверх:")]
-        apartment_floor = apartment_floor[0].split(": ")[-1]
-        number_of_floors = [element for element in info_elements if element.startswith("Поверховість:")]
-        number_of_floors = number_of_floors[0].split(": ")[-1]
-
-        floor = f"{apartment_floor} of {number_of_floors}"
-
-        area = [
-            element
-            for element in info_elements
-            if element.startswith("Загальна площа:")
-        ]
-        area = area[0].split(": ")[-1]
 
         location_city = self.driver.find_element(By.CLASS_NAME, "css-1cju8pu").text
         location_region = info_elements[-1]
         location = location_city + location_region
 
         return name, price, floor, area, location
+
+    @staticmethod
+    def _retrieve_data_from_elements(info_elements):
+        apartment_floor = [element for element in info_elements if element.startswith("Поверх:")]
+        apartment_floor = apartment_floor[0].split(": ")[-1]
+        number_of_floors = [element for element in info_elements if element.startswith("Поверховість:")]
+        number_of_floors = number_of_floors[0].split(": ")[-1]
+
+        floor_info = f"{apartment_floor} of {number_of_floors}"
+
+        area = [element for element in info_elements if element.startswith("Загальна площа:")]
+        area_info = area[0].split(": ")[-1]
+
+        return floor_info, area_info
 
     def _parse_apartments_page(self, page_link: str) -> list[tuple]:
         self.driver.get(page_link)
