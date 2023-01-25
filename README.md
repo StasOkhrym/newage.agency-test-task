@@ -1,6 +1,6 @@
 # Test task newage.agency
 ## Description:
-Repository consists from 3 tasks. Each task located in its folder.
+Repository consists of 3 tasks. Each task located in its folder.
 ## Installing using Github
 Python 3.10  must be installed
 
